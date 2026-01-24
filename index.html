@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Transformation | Laith Alobaidi Group</title>
+
+    <!-- Tailwind + Chart.js -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- FontAwesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- ✅ External CSS -->
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body class="text-stone-800 antialiased">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50 border-b border-stone-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+          <div class="flex items-center">
+            <i class="fas fa-network-wired text-teal-700 text-2xl mr-3"></i>
+            <span class="font-bold text-xl tracking-tight text-stone-900">
+              Laith Alobaidi <span class="text-teal-700">Digital</span>
+            </span>
+          </div>
+
+          <div class="flex items-center">
+            <div class="hidden md:flex space-x-8" id="nav-links">
+              <button
+                onclick="scrollToSection('hero')"
+                class="text-stone-500 hover:text-teal-700 transition"
+                data-i18n="nav.overview"
+              >
+                Overview
+              </button>
+              <button
+                onclick="scrollToSection('ecosystem')"
+                class="text-stone-500 hover:text-teal-700 transition"
+                data-i18n="nav.ecosystem"
+              >
+                The Ecosystem
+              </button>
+              <button
+                onclick="scrollToSection('impact')"
+                class="text-stone-500 hover:text-teal-700 transition"
+                data-i18n="nav.impact"
+              >
+                Impact
+              </button>
+            </div>
+
+            <!-- Language Toggle -->
+            <button
+              onclick="toggleLanguage()"
+              class="ml-4 px-4 py-2 rounded-lg border border-stone-300 text-sm font-bold text-stone-600 hover:bg-teal-50 hover:text-teal-700 transition"
+              id="lang-btn"
+            >
+              AR / EN
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="hero" class="bg-white border-b border-stone-200">
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 text-center"
+      >
+        <span
+          class="inline-block py-1 px-3 rounded-full bg-teal-100 text-teal-800 text-sm font-semibold mb-4"
+          data-i18n="hero.badge"
+        >
+          Automotive Agency Transformation
+        </span>
+
+        <h1
+          class="text-4xl md:text-5xl font-extrabold text-stone-900 tracking-tight mb-6"
+          id="hero-title"
+        >
+          Digital Transformation Through <br class="hidden md:block" />
+          <span class="text-teal-700">System Integration</span>
+        </h1>
+
+        <p
+          class="max-w-2xl mx-auto text-xl text-stone-600 mb-8"
+          data-i18n="hero.subtitle"
+        >
+          A fully integrated digital ecosystem designed to increase sales,
+          improve control, and eliminate lead loss across all brands.
+        </p>
+
+        <button
+          onclick="scrollToSection('challenge-section')"
+          class="bg-teal-700 text-white px-8 py-3 rounded-lg font-medium hover:bg-teal-800 transition shadow-lg hover:shadow-xl"
+          data-i18n="hero.cta"
+        >
+          Explore the Journey
+        </button>
+      </div>
+    </header>
+
+    <!-- Challenge vs Solution -->
+    <section
+      id="challenge-section"
+      class="py-16 bg-stone-50 border-b border-stone-200"
+    >
+      <div class="max-w-4xl mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold text-stone-900 mb-4" data-i18n="shift.title">
+          The Shift
+        </h2>
+        <p class="text-stone-600 mb-8" data-i18n="shift.subtitle">
+          Click the toggle to see how integration changed the landscape.
+        </p>
+
+        <div class="flex justify-center items-center mb-10" id="toggle-row">
+          <span
+            class="mr-3 text-sm font-bold text-stone-500 uppercase tracking-wide"
+            data-i18n="shift.challenge"
+            >The Challenge</span
+          >
+
+          <div
+            class="relative inline-block w-16 mr-2 align-middle select-none transition duration-200 ease-in"
+          >
+            <input
+              type="checkbox"
+              name="toggle"
+              id="toggle-switch"
+              class="toggle-checkbox absolute block w-8 h-8 rounded-full bg-white border-4 appearance-none cursor-pointer transition-transform duration-300 ease-in-out left-0 transform translate-x-0 border-stone-300"
+            />
+            <label
+              for="toggle-switch"
+              class="toggle-label block overflow-hidden h-8 rounded-full bg-stone-300 cursor-pointer"
+            ></label>
+          </div>
+
+          <span
+            class="ml-3 text-sm font-bold text-teal-700 uppercase tracking-wide"
+            data-i18n="shift.solution"
+            >The Solution</span
+          >
+        </div>
+
+        <div
+          id="state-display"
+          class="bg-white rounded-2xl shadow-xl p-8 md:p-12 transition-all duration-500 border-l-8 border-stone-400"
+        ></div>
+      </div>
+    </section>
+
+    <!-- Ecosystem -->
+    <section id="ecosystem" class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-stone-900" data-i18n="ecosystem.title">
+            The Integrated Ecosystem
+          </h2>
+          <p
+            class="mt-4 text-lg text-stone-600 max-w-3xl mx-auto"
+            data-i18n="ecosystem.subtitle"
+          >
+            Select a module below to explore how each system contributes to the
+            unified digital engine.
+          </p>
+        </div>
+
+        <div
+          class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12"
+          id="system-grid"
+        ></div>
+
+        <div
+          id="detail-view"
+          class="bg-stone-50 rounded-2xl border border-stone-200 shadow-inner p-6 md:p-10 fade-in hidden"
+        ></div>
+      </div>
+    </section>
+
+    <!-- Impact -->
+    <section id="impact" class="py-16 bg-stone-900 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold mb-4" data-i18n="impact.title">
+            Strategic Outcomes
+          </h2>
+          <p class="text-stone-400" data-i18n="impact.subtitle">
+            The tangible results of deep system integration.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+          <div class="p-6 bg-stone-800 rounded-xl">
+            <i class="fas fa-chart-line text-4xl text-teal-400 mb-4"></i>
+            <h3 class="text-xl font-bold mb-2" data-i18n="impact.cards.salesTitle">
+              Higher Sales
+            </h3>
+            <p class="text-stone-400 text-sm" data-i18n="impact.cards.salesDesc">
+              Improved performance through disciplined follow-ups.
+            </p>
+          </div>
+
+          <div class="p-6 bg-stone-800 rounded-xl">
+            <i class="fas fa-sliders-h text-4xl text-teal-400 mb-4"></i>
+            <h3 class="text-xl font-bold mb-2" data-i18n="impact.cards.controlTitle">
+              Full Control
+            </h3>
+            <p class="text-stone-400 text-sm" data-i18n="impact.cards.controlDesc">
+              Complete operational visibility via SAP & CRM.
+            </p>
+          </div>
+
+          <div class="p-6 bg-stone-800 rounded-xl">
+            <i class="fas fa-bullseye text-4xl text-teal-400 mb-4"></i>
+            <h3 class="text-xl font-bold mb-2" data-i18n="impact.cards.zeroTitle">
+              Zero Lead Loss
+            </h3>
+            <p class="text-stone-400 text-sm" data-i18n="impact.cards.zeroDesc">
+              Automated capture from WhatsApp & Web.
+            </p>
+          </div>
+
+          <div class="p-6 bg-stone-800 rounded-xl">
+            <i class="fas fa-brain text-4xl text-teal-400 mb-4"></i>
+            <h3 class="text-xl font-bold mb-2" data-i18n="impact.cards.smartTitle">
+              Smart Decisions
+            </h3>
+            <p class="text-stone-400 text-sm" data-i18n="impact.cards.smartDesc">
+              Data-driven strategies, not assumptions.
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-16 text-center border-t border-stone-800 pt-8">
+          <blockquote
+            class="text-xl md:text-2xl font-serif italic text-teal-100"
+            data-i18n="impact.quote"
+          >
+            "Integration is not a feature — it is the competitive advantage."
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-stone-200 py-8 text-center text-stone-500 text-sm">
+      <p data-i18n="footer.copy">
+        &copy; 2026 Laith Alobaidi Group. Internal Transformation Report.
+      </p>
+    </footer>
+
+    
+
+    <!-- ✅ External JS -->
+    <script src="./app.js"></script>
+  </body>
+</html>
