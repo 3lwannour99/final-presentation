@@ -1,0 +1,1529 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Transformation | Laith Alobaidi Group</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- ✅ FIXED FontAwesome link -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f5f5f4;
+      }
+
+      .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 300px;
+        max-height: 400px;
+      }
+      @media (min-width: 768px) {
+        .chart-container {
+          height: 350px;
+        }
+      }
+
+      .fade-in {
+        animation: fadeIn 0.5s ease-in-out;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .card-hover:hover {
+        transform: translateY(-4px);
+        box-shadow:
+          0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+
+      .active-card {
+        border: 2px solid #0f766e;
+        background-color: #f0fdfa;
+      }
+
+      /* Toggle UI */
+      .toggle-checkbox:checked {
+        transform: translateX(2rem);
+        border-color: #0f766e;
+      }
+      .toggle-checkbox:checked + .toggle-label {
+        background-color: #0f766e;
+      }
+
+      /* Lightbox */
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.72);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        z-index: 9999;
+      }
+      .lightbox.open {
+        display: flex;
+      }
+      .lightbox-inner {
+        max-width: 1100px;
+        width: 100%;
+        background: transparent;
+        position: relative;
+      }
+      .lightbox-img {
+        width: 100%;
+        max-height: 85vh;
+        object-fit: contain;
+        border-radius: 16px;
+        box-shadow: 0 20px 35px rgba(0, 0, 0, 0.35);
+      }
+      .lightbox-close {
+        position: absolute;
+        top: -12px;
+        right: -12px;
+        width: 44px;
+        height: 44px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.92);
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+      }
+
+      /* ✅ Tabs */
+      .tab-btn {
+        font-size: 12px;
+        font-weight: 700;
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid #e7e5e4; /* stone-200 */
+        background: #fafaf9; /* stone-50 */
+        color: #57534e; /* stone-600 */
+        transition: all 0.15s ease;
+      }
+      .tab-btn:hover {
+        background: #f0fdfa;
+        color: #0f766e;
+        border-color: #99f6e4;
+      }
+      .tab-btn.active {
+        background: #0f766e;
+        color: #fff;
+        border-color: #0f766e;
+      }
+
+      /* ✅ Slider */
+      .slider-shell {
+        position: relative;
+        overflow: hidden;
+        border-radius: 16px;
+        border: 1px solid #e7e5e4;
+        background: #fff;
+      }
+      .slider-track {
+        display: flex;
+        transition: transform 0.35s ease;
+      }
+      .slider-slide {
+        min-width: 100%;
+        background: #fff;
+      }
+      .slider-slide img {
+        width: 100%;
+        height: 320px;
+        object-fit: contain;
+        display: block;
+        background: #fff;
+      }
+      @media (min-width: 1024px) {
+        .slider-slide img {
+          height: 360px;
+        }
+      }
+
+      .slider-nav {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        pointer-events: none;
+        padding: 12px;
+      }
+      .slider-btn {
+        pointer-events: auto;
+        width: 42px;
+        height: 42px;
+        border-radius: 999px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        background: rgba(255, 255, 255, 0.92);
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        transition: transform 0.15s ease;
+      }
+      .slider-btn:hover {
+        transform: scale(1.03);
+      }
+
+      .slider-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 10px;
+        color: #78716c; /* stone-500 */
+        font-size: 12px;
+      }
+    </style>
+  </head>
+
+  <body class="text-stone-800 antialiased">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50 border-b border-stone-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+          <div class="flex items-center">
+            <i class="fas fa-network-wired text-teal-700 text-2xl mr-3"></i>
+            <span class="font-bold text-xl tracking-tight text-stone-900">
+              Laith Alobaidi <span class="text-teal-700">Digital</span>
+            </span>
+          </div>
+
+          <div class="flex items-center">
+            <div class="hidden md:flex space-x-8" id="nav-links">
+              <button
+                onclick="scrollToSection('hero')"
+                class="text-stone-500 hover:text-teal-700 transition"
+                data-i18n="nav.overview"
+              >
+                Overview
+              </button>
+              <button
+                onclick="scrollToSection('ecosystem')"
+                class="text-stone-500 hover:text-teal-700 transition"
+                data-i18n="nav.ecosystem"
+              >
+                The Ecosystem
+              </button>
+              <button
+                onclick="scrollToSection('impact')"
+                class="text-stone-500 hover:text-teal-700 transition"
+                data-i18n="nav.impact"
+              >
+                Impact
+              </button>
+            </div>
+
+            <!-- Language Toggle -->
+            <button
+              onclick="toggleLanguage()"
+              class="ml-4 px-4 py-2 rounded-lg border border-stone-300 text-sm font-bold text-stone-600 hover:bg-teal-50 hover:text-teal-700 transition"
+              id="lang-btn"
+            >
+              AR / EN
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="hero" class="bg-white border-b border-stone-200">
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 text-center"
+      >
+        <span
+          class="inline-block py-1 px-3 rounded-full bg-teal-100 text-teal-800 text-sm font-semibold mb-4"
+          data-i18n="hero.badge"
+        >
+          Automotive Agency Transformation
+        </span>
+
+        <h1
+          class="text-4xl md:text-5xl font-extrabold text-stone-900 tracking-tight mb-6"
+          id="hero-title"
+        >
+          Digital Transformation Through <br class="hidden md:block" />
+          <span class="text-teal-700">System Integration</span>
+        </h1>
+
+        <p
+          class="max-w-2xl mx-auto text-xl text-stone-600 mb-8"
+          data-i18n="hero.subtitle"
+        >
+          A fully integrated digital ecosystem designed to increase sales,
+          improve control, and eliminate lead loss across all brands.
+        </p>
+
+        <button
+          onclick="scrollToSection('challenge-section')"
+          class="bg-teal-700 text-white px-8 py-3 rounded-lg font-medium hover:bg-teal-800 transition shadow-lg hover:shadow-xl"
+          data-i18n="hero.cta"
+        >
+          Explore the Journey
+        </button>
+      </div>
+    </header>
+
+    <!-- Challenge vs Solution -->
+    <section
+      id="challenge-section"
+      class="py-16 bg-stone-50 border-b border-stone-200"
+    >
+      <div class="max-w-4xl mx-auto px-4 text-center">
+        <h2
+          class="text-3xl font-bold text-stone-900 mb-4"
+          data-i18n="shift.title"
+        >
+          The Shift
+        </h2>
+        <p class="text-stone-600 mb-8" data-i18n="shift.subtitle">
+          Click the toggle to see how integration changed the landscape.
+        </p>
+
+        <div class="flex justify-center items-center mb-10" id="toggle-row">
+          <span
+            class="mr-3 text-sm font-bold text-stone-500 uppercase tracking-wide"
+            data-i18n="shift.challenge"
+            >The Challenge</span
+          >
+
+          <div
+            class="relative inline-block w-16 mr-2 align-middle select-none transition duration-200 ease-in"
+          >
+            <input
+              type="checkbox"
+              name="toggle"
+              id="toggle-switch"
+              class="toggle-checkbox absolute block w-8 h-8 rounded-full bg-white border-4 appearance-none cursor-pointer transition-transform duration-300 ease-in-out left-0 transform translate-x-0 border-stone-300"
+            />
+            <label
+              for="toggle-switch"
+              class="toggle-label block overflow-hidden h-8 rounded-full bg-stone-300 cursor-pointer"
+            ></label>
+          </div>
+
+          <span
+            class="ml-3 text-sm font-bold text-teal-700 uppercase tracking-wide"
+            data-i18n="shift.solution"
+            >The Solution</span
+          >
+        </div>
+
+        <div
+          id="state-display"
+          class="bg-white rounded-2xl shadow-xl p-8 md:p-12 transition-all duration-500 border-l-8 border-stone-400"
+        >
+          <!-- Injected -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Ecosystem -->
+    <section id="ecosystem" class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2
+            class="text-3xl font-bold text-stone-900"
+            data-i18n="ecosystem.title"
+          >
+            The Integrated Ecosystem
+          </h2>
+          <p
+            class="mt-4 text-lg text-stone-600 max-w-3xl mx-auto"
+            data-i18n="ecosystem.subtitle"
+          >
+            Select a module below to explore how each system contributes to the
+            unified digital engine.
+          </p>
+        </div>
+
+        <div
+          class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12"
+          id="system-grid"
+        ></div>
+
+        <div
+          id="detail-view"
+          class="bg-stone-50 rounded-2xl border border-stone-200 shadow-inner p-6 md:p-10 fade-in hidden"
+        ></div>
+      </div>
+    </section>
+
+    <!-- Impact -->
+    <section id="impact" class="py-16 bg-stone-900 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold mb-4" data-i18n="impact.title">
+            Strategic Outcomes
+          </h2>
+          <p class="text-stone-400" data-i18n="impact.subtitle">
+            The tangible results of deep system integration.
+          </p>
+        </div>
+
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center"
+        >
+          <div class="p-6 bg-stone-800 rounded-xl">
+            <i class="fas fa-chart-line text-4xl text-teal-400 mb-4"></i>
+            <h3
+              class="text-xl font-bold mb-2"
+              data-i18n="impact.cards.salesTitle"
+            >
+              Higher Sales
+            </h3>
+            <p
+              class="text-stone-400 text-sm"
+              data-i18n="impact.cards.salesDesc"
+            >
+              Improved performance through disciplined follow-ups.
+            </p>
+          </div>
+          <div class="p-6 bg-stone-800 rounded-xl">
+            <i class="fas fa-sliders-h text-4xl text-teal-400 mb-4"></i>
+            <h3
+              class="text-xl font-bold mb-2"
+              data-i18n="impact.cards.controlTitle"
+            >
+              Full Control
+            </h3>
+            <p
+              class="text-stone-400 text-sm"
+              data-i18n="impact.cards.controlDesc"
+            >
+              Complete operational visibility via SAP & CRM.
+            </p>
+          </div>
+          <div class="p-6 bg-stone-800 rounded-xl">
+            <i class="fas fa-bullseye text-4xl text-teal-400 mb-4"></i>
+            <h3
+              class="text-xl font-bold mb-2"
+              data-i18n="impact.cards.zeroTitle"
+            >
+              Zero Lead Loss
+            </h3>
+            <p class="text-stone-400 text-sm" data-i18n="impact.cards.zeroDesc">
+              Automated capture from WhatsApp & Web.
+            </p>
+          </div>
+          <div class="p-6 bg-stone-800 rounded-xl">
+            <i class="fas fa-brain text-4xl text-teal-400 mb-4"></i>
+            <h3
+              class="text-xl font-bold mb-2"
+              data-i18n="impact.cards.smartTitle"
+            >
+              Smart Decisions
+            </h3>
+            <p
+              class="text-stone-400 text-sm"
+              data-i18n="impact.cards.smartDesc"
+            >
+              Data-driven strategies, not assumptions.
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-16 text-center border-t border-stone-800 pt-8">
+          <blockquote
+            class="text-xl md:text-2xl font-serif italic text-teal-100"
+            data-i18n="impact.quote"
+          >
+            "Integration is not a feature — it is the competitive advantage."
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      class="bg-white border-t border-stone-200 py-8 text-center text-stone-500 text-sm"
+    >
+      <p data-i18n="footer.copy">
+        &copy; 2026 Laith Alobaidi Group. Internal Transformation Report.
+      </p>
+    </footer>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+      <div class="lightbox-inner">
+        <button
+          class="lightbox-close"
+          onclick="forceCloseLightbox()"
+          aria-label="Close"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+        <img
+          id="lightbox-img"
+          class="lightbox-img"
+          src=""
+          alt="Screenshot Preview"
+        />
+      </div>
+    </div>
+
+    <script>
+      // =========================
+      // 1) I18N STORE (EN / AR)
+      // =========================
+      let currentLang = "en";
+
+      const i18n = {
+        en: {
+          nav: {
+            overview: "Overview",
+            ecosystem: "The Ecosystem",
+            impact: "Impact",
+          },
+          hero: {
+            badge: "Automotive Agency Transformation",
+            title1: "Digital Transformation Through",
+            title2: "System Integration",
+            subtitle:
+              "A fully integrated digital ecosystem designed to increase sales, improve control, and eliminate lead loss across all brands.",
+            cta: "Explore the Journey",
+          },
+          shift: {
+            title: "The Shift",
+            subtitle:
+              "Click the toggle to see how integration changed the landscape.",
+            challenge: "The Challenge",
+            solution: "The Solution",
+          },
+          ecosystem: {
+            title: "The Integrated Ecosystem",
+            subtitle:
+              "Select a module below to explore how each system contributes to the unified digital engine.",
+          },
+          impact: {
+            title: "Strategic Outcomes",
+            subtitle: "The tangible results of deep system integration.",
+            cards: {
+              salesTitle: "Higher Sales",
+              salesDesc: "Improved performance through disciplined follow-ups.",
+              controlTitle: "Full Control",
+              controlDesc: "Complete operational visibility via SAP & CRM.",
+              zeroTitle: "Zero Lead Loss",
+              zeroDesc: "Automated capture from WhatsApp & Web.",
+              smartTitle: "Smart Decisions",
+              smartDesc: "Data-driven strategies, not assumptions.",
+            },
+            quote: `"Integration is not a feature — it is the competitive advantage."`,
+          },
+          footer: {
+            copy: "© 2026 Laith Alobaidi Group. Internal Transformation Report.",
+          },
+
+          app: {
+            challenge: {
+              title: "The Challenges (Before)",
+              items: [
+                {
+                  icon: "fa-search-minus",
+                  text: "Leads were being lost due to lack of tracking.",
+                },
+                {
+                  icon: "fa-sync-alt",
+                  text: "Inconsistent follow-up & fragmented cycles.",
+                },
+                {
+                  icon: "fa-unlink",
+                  text: "Disconnected systems creating data silos.",
+                },
+                {
+                  icon: "fa-dice",
+                  text: "Decisions based on assumptions, not data.",
+                },
+              ],
+            },
+            solution: {
+              title: "The Solution (After)",
+              items: [
+                {
+                  icon: "fa-check-circle",
+                  text: "Centralized tracking ensuring Zero Lead Loss.",
+                },
+                {
+                  icon: "fa-robot",
+                  text: "Automated & mandatory follow-up cycles.",
+                },
+                {
+                  icon: "fa-link",
+                  text: "Unified 'Single Source of Truth' ecosystem.",
+                },
+                {
+                  icon: "fa-chart-pie",
+                  text: "Real-time analytics for data-driven precision.",
+                },
+              ],
+            },
+            systems: [
+              {
+                id: "whatsapp",
+                name: "WhatsApp System",
+                description:
+                  "Integrated with CRM & AI for bulk campaigns and automated classification.",
+                details: [
+                  "Bulk messaging campaigns in minutes",
+                  "Automatic lead classification (Interested / Not)",
+                  "AI Sentiment Analysis",
+                  "Sales focus on high-potential leads",
+                ],
+                impact: [
+                  "Faster responses",
+                  "Higher conversion",
+                  "Zero lead loss",
+                ],
+                chartTitle: "AI Lead Classification (Sample Data)",
+              },
+              {
+                id: "incentive",
+                name: "Incentive & Referral",
+                description:
+                  "A viral growth loop integrated with sales reps and customers via QR codes.",
+                details: [
+                  "Sales reps register customers",
+                  "Customers get unique QR Codes",
+                  "Customer brings lead -> Gets Discount",
+                  "Sales Rep -> Gets Reward",
+                ],
+                impact: [
+                  "Motivated teams",
+                  "Organic growth",
+                  "Zero marketing cost",
+                ],
+              },
+              {
+                id: "sap",
+                name: "SAP Dashboard",
+                description:
+                  "Direct integration for real-time sales visibility and performance tracking.",
+                details: [
+                  "Real-time visual dashboards",
+                  "Automated reporting",
+                  "Full management visibility",
+                  "Sales performance tracking",
+                ],
+                impact: [
+                  "Faster decisions",
+                  "Operational control",
+                  "Clear insights",
+                ],
+                chartTitle: "Real-Time Sales Performance Trends",
+              },
+              {
+                id: "tasks",
+                name: "Tasks & Follow-Up",
+                description:
+                  "Automated assignment and mandatory tracking to ensure discipline.",
+                details: [
+                  "Auto-assignment by brand/region",
+                  "Mandatory follow-up windows",
+                  "Performance auditing",
+                  "Escalation reports",
+                ],
+                impact: [
+                  "No neglected leads",
+                  "High discipline",
+                  "Improved closing",
+                ],
+              },
+              {
+                id: "crm",
+                name: "CRM Core System",
+                description:
+                  "The central brain connecting Inventory, Tasks, and Customer Service.",
+                details: [
+                  "Smart follow-up cycles",
+                  "Live Inventory connection",
+                  "Ticketing for complaints",
+                  "Issue resolution workflow",
+                ],
+                impact: ["Better CX", "Higher Retention", "Brand Trust"],
+              },
+              {
+                id: "ads",
+                name: "Ads Monitoring",
+                description:
+                  "Tracking ad spend vs. performance to optimize marketing ROI.",
+                details: [
+                  "Real-time spend tracking",
+                  "Heat-mapping weak brands",
+                  "Granular ROI measurement",
+                  "Data-driven decisions",
+                ],
+                impact: ["Optimized Spend", "Better ROI", "Smart Strategy"],
+                chartTitle: "Ad Spend vs. Revenue (ROI Analysis)",
+              },
+              {
+                id: "meta",
+                name: "Unified Inbox",
+                description:
+                  "Consolidating all social communications into a single efficient stream.",
+                details: [
+                  "All DMs & Comments in one place",
+                  "FB & Insta Unified",
+                  "Elimination of tab-switching",
+                  "Faster response times",
+                ],
+                impact: [
+                  "High Engagement",
+                  "Customer Satisfaction",
+                  "No Missed Inquiries",
+                ],
+              },
+              {
+                id: "web",
+                name: "Web Integration",
+                description:
+                  "4 Brand Websites fully plugged into the CRM lead flow.",
+                details: [
+                  "Dynamic Vehicle Listings",
+                  "Test Drive & Order Forms",
+                  "Instant flow to CRM & Call Center",
+                  "Excel Backup Logging",
+                ],
+                impact: [
+                  "Frictionless Journey",
+                  "Instant Response",
+                  "Max Conversion",
+                ],
+              },
+            ],
+          },
+        },
+
+        ar: {
+          nav: {
+            overview: "نظرة عامة",
+            ecosystem: "المنظومة المتكاملة",
+            impact: "الأثر",
+          },
+          hero: {
+            badge: "التحول الرقمي لوكالات السيارات",
+            title1: "التحول الرقمي عبر",
+            title2: "تكامل الأنظمة",
+            subtitle:
+              "منظومة رقمية متكاملة تهدف إلى زيادة المبيعات، تعزيز التحكم، ومنع ضياع أي عميل محتمل عبر جميع العلامات.",
+            cta: "استكشف الرحلة",
+          },
+          shift: {
+            title: "التحول",
+            subtitle: "اضغط على التبديل لرؤية الفرق قبل وبعد التكامل.",
+            challenge: "التحديات",
+            solution: "الحل",
+          },
+          ecosystem: {
+            title: "المنظومة المتكاملة",
+            subtitle:
+              "اختر أي نظام أدناه لتعرف كيف يساهم كل نظام في محرك رقمي موحّد.",
+          },
+          impact: {
+            title: "النتائج الاستراتيجية",
+            subtitle: "الأثر الملموس لتكامل الأنظمة بشكل عميق.",
+            cards: {
+              salesTitle: "مبيعات أعلى",
+              salesDesc: "تحسين الأداء بفضل المتابعة المنضبطة.",
+              controlTitle: "تحكم كامل",
+              controlDesc: "رؤية تشغيلية كاملة عبر SAP و CRM.",
+              zeroTitle: "صفر ضياع عملاء",
+              zeroDesc: "التقاط تلقائي من واتساب والمواقع.",
+              smartTitle: "قرارات ذكية",
+              smartDesc: "استراتيجيات مبنية على بيانات حقيقية.",
+            },
+            quote: `"التكامل ليس ميزة — بل هو التفوق التنافسي."`,
+          },
+          footer: { copy: "© 2026 مجموعة ليث العبيدي. تقرير التحول الداخلي." },
+
+          app: {
+            challenge: {
+              title: "التحديات (قبل)",
+              items: [
+                {
+                  icon: "fa-search-minus",
+                  text: "كان يتم فقدان العملاء المحتملين بسبب غياب التتبع.",
+                },
+                {
+                  icon: "fa-sync-alt",
+                  text: "متابعة غير ثابتة ودورات بيع متقطعة.",
+                },
+                { icon: "fa-unlink", text: "أنظمة منفصلة تسبب جزر بيانات." },
+                {
+                  icon: "fa-dice",
+                  text: "قرارات مبنية على التخمين بدل البيانات.",
+                },
+              ],
+            },
+            solution: {
+              title: "الحل (بعد)",
+              items: [
+                {
+                  icon: "fa-check-circle",
+                  text: "تتبع مركزي يضمن صفر ضياع للعملاء.",
+                },
+                { icon: "fa-robot", text: "متابعة آلية وإلزامية ضمن النظام." },
+                { icon: "fa-link", text: "منظومة موحّدة كمصدر بيانات واحد." },
+                { icon: "fa-chart-pie", text: "تحليلات لحظية لقرارات دقيقة." },
+              ],
+            },
+            systems: [
+              {
+                id: "whatsapp",
+                name: "نظام واتساب",
+                description:
+                  "تكامل مع CRM وذكاء اصطناعي للحملات الجماعية وتصنيف العملاء تلقائياً.",
+                details: [
+                  "حملات رسائل جماعية خلال دقائق",
+                  "تصنيف تلقائي للعملاء (مهتم / غير مهتم)",
+                  "تحليل مشاعر بالذكاء الاصطناعي",
+                  "تركيز المبيعات على العملاء الأعلى احتمالية",
+                ],
+                impact: ["رد أسرع", "تحويل أعلى", "صفر ضياع عملاء"],
+                chartTitle: "تصنيف العملاء بالذكاء الاصطناعي (بيانات تجريبية)",
+              },
+              {
+                id: "incentive",
+                name: "نظام الحوافز والإحالة",
+                description:
+                  "حلقة نمو تربط المندوب والعميل عبر QR لتحقيق نمو عضوي.",
+                details: [
+                  "المندوب يسجل العميل",
+                  "العميل يحصل على QR خاص",
+                  "العميل يجيب عميل جديد -> يحصل خصم",
+                  "المندوب -> يحصل مكافأة",
+                ],
+                impact: ["تحفيز الفريق", "نمو عضوي", "تقليل تكلفة التسويق"],
+              },
+              {
+                id: "sap",
+                name: "لوحة SAP",
+                description:
+                  "تكامل مباشر لعرض المبيعات لحظياً وتتبع الأداء بشكل واضح للإدارة.",
+                details: [
+                  "لوحات لحظية مرئية",
+                  "تقارير تلقائية",
+                  "رؤية كاملة للإدارة",
+                  "متابعة أداء المبيعات",
+                ],
+                impact: ["قرارات أسرع", "تحكم تشغيلي", "رؤية واضحة"],
+                chartTitle: "اتجاهات الأداء البيعي لحظياً",
+              },
+              {
+                id: "tasks",
+                name: "نظام المهام والمتابعة",
+                description:
+                  "توزيع آلي للمهام ومتابعة إلزامية لضمان الانضباط وعدم فقدان أي عميل.",
+                details: [
+                  "توزيع تلقائي حسب البراند/المنطقة",
+                  "نوافذ متابعة إلزامية",
+                  "تدقيق أداء الموظفين",
+                  "تقارير تصعيد",
+                ],
+                impact: ["لا إهمال للعملاء", "انضباط أعلى", "إغلاق أفضل"],
+              },
+              {
+                id: "crm",
+                name: "نظام CRM الأساسي",
+                description:
+                  "العقل المركزي الذي يربط المخزون والمهام وخدمة العملاء في مكان واحد.",
+                details: [
+                  "دورات متابعة ذكية",
+                  "ربط مباشر بالمخزون",
+                  "نظام شكاوى وتذاكر",
+                  "مسار لحل المشاكل",
+                ],
+                impact: ["تحسين تجربة العميل", "ولاء أعلى", "ثقة بالعلامة"],
+              },
+              {
+                id: "ads",
+                name: "مراقبة الإعلانات",
+                description:
+                  "تتبع الصرف والإيراد لتحسين العائد واتخاذ قرار تسويقي أدق.",
+                details: [
+                  "تتبع صرف لحظي",
+                  "تحديد البراندات الضعيفة",
+                  "قياس العائد بشكل تفصيلي",
+                  "قرارات مبنية على بيانات",
+                ],
+                impact: ["صرف أذكى", "عائد أفضل", "استراتيجية دقيقة"],
+                chartTitle: "مقارنة الصرف مقابل الإيراد (تحليل العائد)",
+              },
+              {
+                id: "meta",
+                name: "صندوق موحّد للسوشال",
+                description:
+                  "تجميع جميع رسائل وتعليقات السوشال بمكان واحد لزيادة السرعة والكفاءة.",
+                details: [
+                  "كل الرسائل والتعليقات بمكان واحد",
+                  "دمج فيسبوك وإنستغرام",
+                  "إلغاء التنقل بين التبويبات",
+                  "زيادة سرعة الرد",
+                ],
+                impact: ["تفاعل أعلى", "رضا العملاء", "لا طلبات فائتة"],
+              },
+              {
+                id: "web",
+                name: "تكامل المواقع",
+                description:
+                  "٤ مواقع للبراندات مربوطة بالكامل مع CRM لتدفق العملاء فورياً دون تأخير.",
+                details: [
+                  "عرض سيارات ديناميكي",
+                  "نماذج تجربة قيادة وطلب",
+                  "تدفق فوري إلى CRM والكول سنتر",
+                  "تسجيل احتياطي على Excel",
+                ],
+                impact: ["رحلة سهلة", "رد فوري", "تحويل أعلى"],
+              },
+            ],
+          },
+        },
+      };
+
+      // =========================
+      // 2) BASE (icons/charts/visuals + screenshots)
+      // =========================
+      const systemsBase = [
+        {
+          id: "whatsapp",
+          icon: "fa-whatsapp",
+          chartType: "doughnut",
+          screenshots: ["./whatsapp.png"],
+          chartData: {
+            labels: ["Interested", "Not Interested", "Unsure"],
+            datasets: [
+              {
+                data: [65, 25, 10],
+                backgroundColor: ["#0f766e", "#d6d3d1", "#fcd34d"],
+              },
+            ],
+          },
+        },
+        {
+          id: "incentive",
+          icon: "fa-hand-holding-usd",
+          screenshots: ["./rewards.jpeg"],
+          visualType: "flow",
+        },
+        {
+          id: "sap",
+          icon: "fa-chart-bar",
+          screenshots: ["./sap.jpeg"],
+          chartType: "line",
+          chartData: {
+            labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+            datasets: [
+              {
+                label: "Sales Velocity (Post-Integration)",
+                data: [12, 19, 25, 32],
+                borderColor: "#0f766e",
+                tension: 0.4,
+                fill: true,
+                backgroundColor: "rgba(15, 118, 110, 0.1)",
+              },
+            ],
+          },
+        },
+        {
+          id: "tasks",
+          icon: "fa-clipboard-check",
+          screenshots: ["./tasks.jpeg"],
+          visualType: "list-highlight",
+        },
+        {
+          id: "crm",
+          icon: "fa-database",
+          screenshots: [],
+          visualType: "icon-grid",
+        },
+        {
+          id: "ads",
+          icon: "fa-bullhorn",
+          screenshots: [],
+          chartType: "bar",
+          chartData: {
+            labels: ["Brand A", "Brand B", "Brand C"],
+            datasets: [
+              {
+                label: "Ad Spend",
+                data: [5000, 3000, 4000],
+                backgroundColor: "#a8a29e",
+              },
+              {
+                label: "Revenue Generated",
+                data: [15000, 12000, 9000],
+                backgroundColor: "#0f766e",
+              },
+            ],
+          },
+        },
+        {
+          id: "meta",
+          icon: "fa-comments",
+          screenshots: [],
+          visualType: "comparison",
+        },
+        {
+          id: "web",
+          icon: "fa-laptop-code",
+          screenshots: [],
+          visualType: "flow-web",
+        },
+      ];
+
+      // =========================
+      // 3) Build appData per language
+      // =========================
+      function buildAppData(lang) {
+        const t = i18n[lang].app;
+
+        const systems = t.systems.map((s) => {
+          const base = systemsBase.find((b) => b.id === s.id) || {};
+          return { ...base, ...s };
+        });
+
+        return {
+          challenge: { ...t.challenge, style: "border-l-8 border-red-400" },
+          solution: { ...t.solution, style: "border-l-8 border-teal-500" },
+          systems,
+        };
+      }
+
+      let appData = buildAppData(currentLang);
+
+      // =========================
+      // 4) State + DOM
+      // =========================
+      let currentChart = null;
+
+      const toggleSwitch = document.getElementById("toggle-switch");
+      const stateDisplay = document.getElementById("state-display");
+      const systemGrid = document.getElementById("system-grid");
+      const detailView = document.getElementById("detail-view");
+
+      // =========================
+      // 5) Init
+      // =========================
+      document.addEventListener("DOMContentLoaded", () => {
+        applyTranslations();
+        renderChallengeSection(false);
+        renderSystemGrid();
+        loadSystemDetail(appData.systems[0].id);
+      });
+
+      // =========================
+      // 6) Language
+      // =========================
+      function toggleLanguage() {
+        currentLang = currentLang === "en" ? "ar" : "en";
+        document.documentElement.lang = currentLang;
+        document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
+
+        appData = buildAppData(currentLang);
+
+        applyTranslations();
+
+        const isSolution = toggleSwitch.checked;
+        renderChallengeSection(isSolution);
+        renderSystemGrid();
+        loadSystemDetail(appData.systems[0].id);
+      }
+
+      function getByPath(obj, path) {
+        return path.split(".").reduce((acc, key) => acc && acc[key], obj);
+      }
+
+      function applyTranslations() {
+        const t = i18n[currentLang];
+
+        const heroTitle = document.getElementById("hero-title");
+        heroTitle.innerHTML = `
+          ${t.hero.title1} <br class="hidden md:block" />
+          <span class="text-teal-700">${t.hero.title2}</span>
+        `;
+
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.getAttribute("data-i18n");
+          const val = getByPath(t, key);
+          if (typeof val === "string") el.textContent = val;
+        });
+      }
+
+      // =========================
+      // 7) Toggle
+      // =========================
+      toggleSwitch.addEventListener("change", (e) => {
+        renderChallengeSection(e.target.checked);
+      });
+
+      function renderChallengeSection(isSolution) {
+        const data = isSolution ? appData.solution : appData.challenge;
+
+        stateDisplay.style.opacity = "0";
+
+        setTimeout(() => {
+          stateDisplay.className = `bg-white rounded-2xl shadow-xl p-8 md:p-12 transition-all duration-500 ${data.style}`;
+          stateDisplay.innerHTML = `
+            <h3 class="text-2xl font-bold mb-6 text-stone-800">${data.title}</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              ${data.items
+                .map(
+                  (item) => `
+                <div class="flex items-start">
+                  <div class="flex-shrink-0 bg-stone-100 p-3 rounded-full ${
+                    currentLang === "ar" ? "ml-4" : "mr-4"
+                  }">
+                    <i class="fas ${item.icon} ${
+                      isSolution ? "text-teal-600" : "text-red-500"
+                    } text-xl"></i>
+                  </div>
+                  <p class="text-stone-600 font-medium pt-2">${item.text}</p>
+                </div>
+              `,
+                )
+                .join("")}
+            </div>
+          `;
+          stateDisplay.style.opacity = "1";
+        }, 300);
+      }
+
+      // =========================
+      // 8) Grid
+      // =========================
+      function faPrefix(icon) {
+        // icons that are "brands"
+        const brands = ["fa-whatsapp"];
+        return brands.includes(icon) ? "fab" : "fas";
+      }
+
+      function renderSystemGrid() {
+        systemGrid.innerHTML = appData.systems
+          .map(
+            (sys) => `
+          <div onclick="loadSystemDetail('${sys.id}')"
+               id="card-${sys.id}"
+               class="bg-white p-6 rounded-xl shadow-sm border border-stone-100 cursor-pointer transition-all duration-200 card-hover group text-center">
+            <div class="w-12 h-12 mx-auto bg-stone-50 rounded-full flex items-center justify-center mb-4 group-hover:bg-teal-50 transition">
+<i class="${faPrefix(sys.icon)} ${sys.icon} text-stone-400 group-hover:text-teal-600 text-xl transition"></i>
+            </div>
+            <h3 class="font-bold text-stone-700 group-hover:text-teal-800">${sys.name}</h3>
+          </div>
+        `,
+          )
+          .join("");
+      }
+
+      // =========================
+      // 9) Detail View (✅ Tabs + Slider for screenshots)
+      // =========================
+      function loadSystemDetail(id) {
+        const sys = appData.systems.find((s) => s.id === id);
+        if (!sys) return;
+
+        document
+          .querySelectorAll("#system-grid > div")
+          .forEach((el) => el.classList.remove("active-card"));
+        const activeCard = document.getElementById(`card-${id}`);
+        if (activeCard) activeCard.classList.add("active-card");
+
+        detailView.classList.add("hidden");
+
+        // --- Build Overview visual content (chart/flow/etc) ---
+        let overviewVisual = "";
+
+        if (sys.chartType) {
+          overviewVisual = `
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-stone-100 h-full flex flex-col justify-center">
+              <h4 class="text-center text-sm font-semibold text-stone-500 mb-4">${sys.chartTitle || ""}</h4>
+              <div class="chart-container">
+                <canvas id="dynamicChart"></canvas>
+              </div>
+            </div>
+          `;
+        } else if (sys.visualType === "flow") {
+          overviewVisual = `
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-100 h-full flex flex-col justify-center items-center space-y-4">
+              <h4 class="text-sm font-semibold text-stone-500 mb-2">${
+                currentLang === "ar" ? "مسار الإحالة" : "Referral Loop Workflow"
+              }</h4>
+              <div class="flex flex-col items-center w-full">
+                <div class="bg-teal-50 px-4 py-2 rounded-lg text-teal-800 font-bold w-full text-center border border-teal-100">
+                  <i class="fas fa-user-tie ${currentLang === "ar" ? "ml-2" : "mr-2"}"></i>${
+                    currentLang === "ar" ? "مندوب المبيعات" : "Sales Rep"
+                  }
+                </div>
+                <i class="fas fa-arrow-down text-stone-300 my-2"></i>
+                <div class="bg-stone-50 px-4 py-2 rounded-lg text-stone-700 w-full text-center border border-stone-200">
+                  <i class="fas fa-qrcode ${currentLang === "ar" ? "ml-2" : "mr-2"}"></i>${
+                    currentLang === "ar" ? "إنشاء QR" : "Generates QR Code"
+                  }
+                </div>
+                <i class="fas fa-arrow-down text-stone-300 my-2"></i>
+                <div class="bg-stone-50 px-4 py-2 rounded-lg text-stone-700 w-full text-center border border-stone-200">
+                  <i class="fas fa-user ${currentLang === "ar" ? "ml-2" : "mr-2"}"></i>${
+                    currentLang === "ar" ? "العميل يشارك" : "Customer Shares"
+                  }
+                </div>
+                <div class="flex w-full justify-between mt-2 text-2xl text-stone-300">
+                  <i class="fas fa-arrow-down-left"></i>
+                  <i class="fas fa-arrow-down-right"></i>
+                </div>
+                <div class="flex w-full justify-between gap-2 mt-2">
+                  <div class="bg-green-50 p-2 rounded text-xs text-green-800 text-center flex-1 border border-green-100">${
+                    currentLang === "ar" ? "💰 مكافأة للمندوب" : "💰 Rep Reward"
+                  }</div>
+                  <div class="bg-blue-50 p-2 rounded text-xs text-blue-800 text-center flex-1 border border-blue-100">${
+                    currentLang === "ar" ? "🏷️ خصم للعميل" : "🏷️ Cust Discount"
+                  }</div>
+                </div>
+              </div>
+            </div>
+          `;
+        } else if (sys.visualType === "flow-web") {
+          overviewVisual = `
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-100 h-full flex flex-col justify-center">
+              <h4 class="text-sm font-semibold text-stone-500 mb-4 text-center">${
+                currentLang === "ar"
+                  ? "تدفق العميل الرقمي"
+                  : "Digital Lead Flow"
+              }</h4>
+              <div class="space-y-3">
+                <div class="flex items-center">
+                  <div class="w-10 h-10 rounded bg-stone-200 flex items-center justify-center"><i class="fas fa-globe text-stone-600"></i></div>
+                  <div class="flex-1 h-1 bg-stone-200 mx-2"></div>
+                  <span class="text-xs text-stone-500 uppercase font-bold">${currentLang === "ar" ? "دخول" : "Entry"}</span>
+                </div>
+                <div class="${currentLang === "ar" ? "pr-12" : "pl-12"} space-y-2">
+                  <div class="p-2 bg-teal-50 border border-teal-100 rounded text-sm text-teal-800">
+                    <i class="fas fa-bolt ${currentLang === "ar" ? "ml-2" : "mr-2"}"></i>${
+                      currentLang === "ar"
+                        ? "CRM (فوري)"
+                        : "CRM System (Instant)"
+                    }
+                  </div>
+                  <div class="p-2 bg-stone-50 border border-stone-200 rounded text-sm text-stone-600">
+                    <i class="fas fa-headset ${currentLang === "ar" ? "ml-2" : "mr-2"}"></i>${
+                      currentLang === "ar"
+                        ? "مركز الاتصال (تنبيه)"
+                        : "Call Center (Notification)"
+                    }
+                  </div>
+                  <div class="p-2 bg-stone-50 border border-stone-200 rounded text-sm text-stone-600">
+                    <i class="fas fa-file-excel ${currentLang === "ar" ? "ml-2" : "mr-2"}"></i>${
+                      currentLang === "ar"
+                        ? "Excel (نسخة احتياط)"
+                        : "Excel Log (Backup)"
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        } else {
+          overviewVisual = `
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-100 h-full flex flex-col justify-center items-center text-center">
+              <i class="fas ${sys.icon} text-6xl text-stone-200 mb-4"></i>
+              <p class="text-stone-500 italic">"${
+                currentLang === "ar" ? "التكامل يضمن " : "Integration ensuring "
+              }${((sys.impact || [])[0] || "").toLowerCase()}"</p>
+            </div>
+          `;
+        }
+
+        const hasShots = sys.screenshots && sys.screenshots.length;
+        const sliderId = `slider-${sys.id}`;
+
+        // ✅ Right panel with tabs
+        const rightPanel = `
+          <div class="bg-white p-5 rounded-xl shadow-sm border border-stone-100">
+            <div class="flex items-center justify-between mb-4" id="rightTabs-${sys.id}">
+              <h4 class="text-sm font-semibold text-stone-500">
+                ${currentLang === "ar" ? "عرض النظام" : "Module View"}
+              </h4>
+
+              <div class="flex gap-2">
+                <button class="tab-btn active" data-tab="overview" onclick="setRightTab('${sys.id}','overview')">
+                  ${currentLang === "ar" ? "نظرة" : "Overview"}
+                </button>
+
+                <button
+                  class="tab-btn ${hasShots ? "" : "opacity-40 cursor-not-allowed"}"
+                  ${hasShots ? "" : "disabled"}
+                  data-tab="shots"
+                  onclick="setRightTab('${sys.id}','shots')"
+                >
+                  ${currentLang === "ar" ? "الصور" : "Screenshots"}
+                </button>
+              </div>
+            </div>
+
+            <div id="tab-overview-${sys.id}">
+              ${overviewVisual}
+            </div>
+
+            <div id="tab-shots-${sys.id}" class="hidden">
+              ${
+                hasShots
+                  ? `
+                <div class="slider-shell" id="${sliderId}">
+                  <div class="slider-track">
+                    ${sys.screenshots
+                      .map(
+                        (src) => `
+                      <div class="slider-slide">
+                        <img src="${src}" alt="screenshot" onclick="openLightbox('${src}')" />
+                      </div>
+                    `,
+                      )
+                      .join("")}
+                  </div>
+
+                  <div class="slider-nav">
+                    <button class="slider-btn" onclick="sliderPrev('${sliderId}')" aria-label="Prev">
+                      <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="slider-btn" onclick="sliderNext('${sliderId}')" aria-label="Next">
+                      <i class="fas fa-chevron-right"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="slider-meta">
+                  <span>${currentLang === "ar" ? "اضغط على الصورة للتكبير" : "Click image to zoom"}</span>
+                  <span id="${sliderId}-count">1 / ${sys.screenshots.length}</span>
+                </div>
+              `
+                  : `
+                <div class="text-center text-stone-500 py-10">
+                  <i class="fas fa-image text-4xl text-stone-200 mb-3"></i>
+                  <p>${currentLang === "ar" ? "لا توجد صور لهذا النظام" : "No screenshots provided for this module."}</p>
+                </div>
+              `
+              }
+            </div>
+          </div>
+        `;
+
+        // ✅ Fill Detail View
+        detailView.innerHTML = `
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start fade-in">
+            <!-- Left -->
+            <div>
+              <div class="flex items-center mb-4">
+                <div class="bg-teal-100 p-2 rounded-lg ${currentLang === "ar" ? "ml-3" : "mr-3"}">
+                  <i class="${faPrefix(sys.icon)} ${sys.icon} text-teal-700 text-xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-stone-800">${sys.name}</h3>
+              </div>
+
+              <p class="text-stone-600 text-lg mb-6 leading-relaxed border-l-4 border-teal-200 pl-4 ${
+                currentLang === "ar" ? "border-l-0 border-r-4 pr-4 pl-0" : ""
+              }">
+                ${sys.description || ""}
+              </p>
+
+              <div class="mb-6">
+                <h4 class="text-sm font-bold text-stone-400 uppercase tracking-wider mb-3">
+                  ${currentLang === "ar" ? "القدرات الأساسية" : "Key Capabilities"}
+                </h4>
+                <ul class="space-y-2">
+                  ${(sys.details || [])
+                    .map(
+                      (d) => `
+                    <li class="flex items-start">
+                      <i class="fas fa-check text-teal-500 mt-1 ${currentLang === "ar" ? "ml-2" : "mr-2"} text-xs"></i>
+                      <span class="text-stone-700">${d}</span>
+                    </li>
+                  `,
+                    )
+                    .join("")}
+                </ul>
+              </div>
+
+              <div>
+                <h4 class="text-sm font-bold text-stone-400 uppercase tracking-wider mb-3">
+                  ${currentLang === "ar" ? "الأثر على الأعمال" : "Business Impact"}
+                </h4>
+                <div class="flex flex-wrap gap-2">
+                  ${(sys.impact || [])
+                    .map(
+                      (i) => `
+                    <span class="bg-stone-200 text-stone-700 px-3 py-1 rounded-full text-sm font-medium shadow-sm">${i}</span>
+                  `,
+                    )
+                    .join("")}
+                </div>
+              </div>
+            </div>
+
+            <!-- Right -->
+            <div class="h-full">
+              ${rightPanel}
+            </div>
+          </div>
+        `;
+
+        detailView.classList.remove("hidden");
+
+        // Init chart if in overview
+        if (sys.chartType) initChart(sys.chartType, sys.chartData);
+
+        // Init slider if screenshots exist
+        if (hasShots) sliderInit(sliderId);
+      }
+
+      // =========================
+      // 10) Charts
+      // =========================
+      function initChart(type, data) {
+        const canvas = document.getElementById("dynamicChart");
+        if (!canvas) return;
+
+        const ctx = canvas.getContext("2d");
+        if (currentChart) currentChart.destroy();
+
+        currentChart = new Chart(ctx, {
+          type: type,
+          data: data,
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: "bottom",
+                labels: { usePointStyle: true, padding: 20 },
+              },
+            },
+            scales:
+              type === "doughnut"
+                ? {}
+                : {
+                    y: {
+                      beginAtZero: true,
+                      grid: { display: true, color: "#f5f5f4" },
+                    },
+                    x: { grid: { display: false } },
+                  },
+          },
+        });
+      }
+
+      // =========================
+      // 11) Tabs (Right Panel)
+      // =========================
+      function setRightTab(sysId, tab) {
+        const ov = document.getElementById(`tab-overview-${sysId}`);
+        const sh = document.getElementById(`tab-shots-${sysId}`);
+        const tabsBar = document.getElementById(`rightTabs-${sysId}`);
+        if (!ov || !sh || !tabsBar) return;
+
+        tabsBar
+          .querySelectorAll(".tab-btn")
+          .forEach((b) => b.classList.remove("active"));
+        const btn = tabsBar.querySelector(`.tab-btn[data-tab="${tab}"]`);
+        if (btn) btn.classList.add("active");
+
+        if (tab === "overview") {
+          ov.classList.remove("hidden");
+          sh.classList.add("hidden");
+        } else {
+          ov.classList.add("hidden");
+          sh.classList.remove("hidden");
+        }
+      }
+
+      // =========================
+      // 12) Slider
+      // =========================
+      const sliderState = {};
+
+      function sliderInit(sliderId) {
+        sliderState[sliderId] = sliderState[sliderId] || { index: 0 };
+        sliderGo(sliderId, 0);
+      }
+
+      function sliderGo(sliderId, index) {
+        const root = document.getElementById(sliderId);
+        if (!root) return;
+        const track = root.querySelector(".slider-track");
+        const slides = root.querySelectorAll(".slider-slide");
+        if (!track || !slides.length) return;
+
+        const max = slides.length - 1;
+        const i = Math.max(0, Math.min(index, max));
+        sliderState[sliderId].index = i;
+
+        track.style.transform = `translateX(-${i * 100}%)`;
+
+        const count = document.getElementById(`${sliderId}-count`);
+        if (count) count.textContent = `${i + 1} / ${slides.length}`;
+      }
+
+      function sliderNext(sliderId) {
+        const st = sliderState[sliderId] || { index: 0 };
+        sliderGo(sliderId, st.index + 1);
+      }
+
+      function sliderPrev(sliderId) {
+        const st = sliderState[sliderId] || { index: 0 };
+        sliderGo(sliderId, st.index - 1);
+      }
+
+      // =========================
+      // 13) Scroll
+      // =========================
+      function scrollToSection(id) {
+        document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+      }
+
+      // =========================
+      // 14) Lightbox
+      // =========================
+      function openLightbox(src) {
+        const lb = document.getElementById("lightbox");
+        const img = document.getElementById("lightbox-img");
+        img.src = src;
+        lb.classList.add("open");
+      }
+      function closeLightbox(e) {
+        if (e.target.id === "lightbox") forceCloseLightbox();
+      }
+      function forceCloseLightbox() {
+        const lb = document.getElementById("lightbox");
+        const img = document.getElementById("lightbox-img");
+        lb.classList.remove("open");
+        img.src = "";
+      }
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") forceCloseLightbox();
+      });
+    </script>
+  </body>
+</html>
