@@ -44,16 +44,93 @@ body {
   background-color: #f0fdfa;
 }
 
-/* Toggle UI */
-.toggle-checkbox:checked {
-  transform: translateX(2rem);
-  border-color: #0f766e;
-}
-.toggle-checkbox:checked + .toggle-label {
-  background-color: #0f766e;
+/* =========================
+   ✅ TOGGLE (FIXED)
+   - Pure CSS (no @apply)
+   - Works with LTR/RTL
+========================= */
+.toggle-wrap {
+  position: relative;
+  width: 48px; /* track width */
+  height: 28px; /* track height */
+  display: inline-block;
+  vertical-align: middle;
 }
 
-/* Lightbox */
+/* hide checkbox but keep it clickable via label */
+.toggle-checkbox {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.toggle-label {
+  position: absolute;
+  inset: 0;
+  background: #d6d3d1; /* stone-300 */
+  border-radius: 999px;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* thumb */
+.toggle-label::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+  transition: transform 0.22s ease;
+  will-change: transform;
+}
+
+/* checked state */
+.toggle-checkbox:checked + .toggle-label {
+  background: #0f766e; /* teal-700 */
+}
+
+/* move thumb in LTR */
+html[dir="ltr"] .toggle-checkbox:checked + .toggle-label::before {
+  transform: translateX(20px);
+}
+
+/* =========================
+   ✅ TOGGLE - USING LEFT PROPERTY
+========================= */
+
+/* حالة غير محددة (Challenge) */
+.toggle-label::before {
+  left: 3px;
+  right: auto;
+}
+
+/* حالة محددة (Solution) - LTR */
+.toggle-checkbox:checked + .toggle-label::before {
+  left: calc(100% - 45px); /* 48px - 22px - 1px */
+  right: auto;
+}
+
+/* حالة محددة (Solution) - RTL */
+html[dir="rtl"] .toggle-checkbox:checked + .toggle-label::before {
+  left: 3px;
+  right: auto;
+}
+
+html[dir="rtl"] .toggle-checkbox:not(:checked) + .toggle-label::before {
+  left: calc(100% - 25px);
+  right: auto;
+}
+/* =========================
+   Lightbox
+========================= */
 .lightbox {
   position: fixed;
   inset: 0;
@@ -93,8 +170,14 @@ body {
   cursor: pointer;
   border: 1px solid rgba(0, 0, 0, 0.08);
 }
+html[dir="rtl"] .lightbox-close {
+  right: auto;
+  left: -12px;
+}
 
-/* Tabs */
+/* =========================
+   Tabs
+========================= */
 .tab-btn {
   font-size: 12px;
   font-weight: 700;
@@ -116,7 +199,9 @@ body {
   border-color: #0f766e;
 }
 
-/* Slider */
+/* =========================
+   Slider
+========================= */
 .slider-shell {
   position: relative;
   overflow: hidden;
@@ -126,7 +211,7 @@ body {
 }
 .slider-track {
   display: flex;
-  flex-wrap: nowrap; /* مهم */
+  flex-wrap: nowrap;
   width: 100%;
   transition: transform 0.35s ease;
 }
@@ -134,7 +219,6 @@ body {
 .slider-slide {
   flex: 0 0 100%;
   width: 100%;
-  background: #fff;
   background: #fff;
 }
 .slider-slide img {
@@ -184,7 +268,9 @@ body {
   font-size: 12px;
 }
 
-/* Extra: Accordion */
+/* =========================
+   Accordion
+========================= */
 .acc-item {
   border: 1px solid #e7e5e4;
   border-radius: 14px;
@@ -222,12 +308,6 @@ body {
 .acc-icon {
   transition: transform 0.15s ease;
 }
-
-/* RTL tweaks */
 html[dir="rtl"] .acc-btn {
   text-align: right;
-}
-html[dir="rtl"] .lightbox-close {
-  right: auto;
-  left: -12px;
 }

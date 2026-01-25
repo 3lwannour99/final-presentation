@@ -30,7 +30,7 @@ const i18n = {
   en: {
     nav: { overview: "Overview", ecosystem: "The Ecosystem", impact: "Impact" },
     hero: {
-      badge: "Automotive Agency Transformation",
+      badge: "Digital transformation of Laith Al-Obaidi Company",
       title1: "Digital Transformation Through",
       title2: "System Integration",
       subtitle:
@@ -440,7 +440,7 @@ const i18n = {
       impact: "الأثر",
     },
     hero: {
-      badge: "التحول الرقمي لوكالات السيارات",
+      badge: "التحول الرقمي لشركة ليث العبيدي",
       title1: "التحول الرقمي عبر",
       title2: "تكامل الأنظمة",
       subtitle:
