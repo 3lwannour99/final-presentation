@@ -311,3 +311,28 @@ html[dir="rtl"] .lightbox-close {
 html[dir="rtl"] .acc-btn {
   text-align: right;
 }
+/* =========================
+   🔧 Screenshots as vertical stack (ALL modules)
+========================= */
+
+/* ألغِ فكرة السلايدر */
+.slider-track {
+  display: block;
+  transform: none !important;
+}
+
+/* كل صورة تأخذ عرض كامل وتجي تحت اللي قبلها */
+.slider-slide {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* تحسين شكل الصور */
+.slider-slide img {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  border-radius: 12px;
+  border: 1px solid #e7e5e4;
+}

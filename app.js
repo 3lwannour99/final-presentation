@@ -6,7 +6,6 @@
    - Toggle Challenge/Solution
    - Module detail view with Tabs + Slider + Lightbox + Charts
 ========================================================= */
-console.log("✅ APP.JS LOADED - META TEXT VERSION 777");
 
 /* =========================
    1) STATE
@@ -33,7 +32,7 @@ const i18n = {
     hero: {
       badge: "Digital transformation of Laith Al-Obaidi Company",
       title1: "Digital Transformation Through",
-      title2: "System Integration",
+      title2: "all sales channels",
       subtitle:
         "A fully integrated ecosystem that increases sales, increases control, and eliminates lead loss across all brands.",
       cta: "Explore the Journey",
@@ -443,7 +442,7 @@ const i18n = {
     hero: {
       badge: "التحول الرقمي لشركة ليث العبيدي",
       title1: "التحول الرقمي عبر",
-      title2: "تكامل الأنظمة",
+      title2: "جميع القنوات البيعية",
       subtitle:
         "منظومة متكاملة ترفع المبيعات، تزيد التحكم، وتمنع ضياع أي عميل محتمل عبر جميع البراندات.",
       cta: "استكشف الرحلة",
@@ -820,7 +819,11 @@ const systemsBase = [
     id: "whatsapp",
     icon: "fa-whatsapp",
     chartType: "doughnut",
-    screenshots: ["./whatsapp.png"],
+    screenshots: [
+      "./whatsapp/whatsapp.png",
+      "./whatsapp/wjatsapp1.png",
+      "./whatsapp/whatsapp2.png",
+    ],
     chartData: {
       labels: ["Interested", "Not Interested", "Unsure"],
       datasets: [
@@ -834,13 +837,22 @@ const systemsBase = [
   {
     id: "incentive",
     icon: "fa-hand-holding-usd",
-    screenshots: ["./rewards.jpeg"],
+    screenshots: [
+      "./reward/rewards.jpeg",
+      "./reward/reward1.png",
+      "./reward/reward2.png",
+    ],
     visualType: "flow",
   },
   {
     id: "sap",
     icon: "fa-chart-bar",
-    screenshots: ["./sap.jpeg"],
+    screenshots: [
+      "./sap/sap.jpeg",
+      "./sap/sap1.png",
+      "./sap/sap2.png",
+      "./sap/sap3.png",
+    ],
     chartType: "line",
     chartData: {
       labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
@@ -859,10 +871,20 @@ const systemsBase = [
   {
     id: "tasks",
     icon: "fa-clipboard-check",
-    screenshots: ["./tasks.jpeg"],
+    screenshots: [
+      "./tasks/tasks.jpeg",
+      "./tasks/task1.png",
+      "./tasks/task2.png",
+      "./tasks/task3.png",
+    ],
     visualType: "list-highlight",
   },
-  { id: "crm", icon: "fa-database", screenshots: [], visualType: "icon-grid" },
+  {
+    id: "crm",
+    icon: "fa-database",
+    screenshots: ["./crm/crm1.png", "./crm/crm2.png", "./crm/crm3.png"],
+    visualType: "icon-grid",
+  },
   {
     id: "ads",
     icon: "fa-bullhorn",
@@ -1191,7 +1213,6 @@ function loadSystemDetail(id) {
       </div>
     </div>
   `;
-  console.log("✅ APP.JS LOADED - META TEXT VERSION 777");
 
   // left panel (story)
   const integrationChips = (sys.integration || [])
@@ -1490,4 +1511,3 @@ window.openLightbox = openLightbox;
 window.closeLightbox = closeLightbox;
 window.forceCloseLightbox = forceCloseLightbox;
 window.toggleAcc = toggleAcc;
-console.log("✅ APP.JS LOADED - META TEXT VERSION 777");
