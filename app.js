@@ -6,6 +6,7 @@
    - Toggle Challenge/Solution
    - Module detail view with Tabs + Slider + Lightbox + Charts
 ========================================================= */
+console.log("✅ APP.JS LOADED - META TEXT VERSION 777");
 
 /* =========================
    1) STATE
@@ -175,7 +176,7 @@ const i18n = {
           id: "incentive",
           name: "Incentive & Referral System (QR)",
           description:
-            "A controlled referral engine. Customers receive a unique QR code. Referrals create warm leads in CRM with one-time rewards (non-hierarchical) to avoid losses.",
+            "A controlled referral engine. Customers receive a unique QR code. Referrals create  leads in CRM with one-time rewards (non-hierarchical) to avoid losses.",
           capabilities: [
             "Sales reps register customers",
             "Unique QR per customer",
@@ -416,7 +417,7 @@ const i18n = {
             "CRM stores call outcome and continues follow-up cycle.",
           ],
           salesHow: [
-            "Hot leads are contacted fast → higher close rate.",
+            "leads are contacted fast → higher close rate.",
             "Backup prevents data loss → leads never disappear.",
           ],
           controlHow: [
@@ -503,7 +504,7 @@ const i18n = {
             text: "فقدان عملاء محتملين بسبب غياب التتبع.",
           },
           { icon: "fa-sync-alt", text: "متابعة غير ثابتة ودورة بيع متقطعة." },
-          { icon: "fa-unlink", text: "أنظمة منفصلة تسبب جزر بيانات." },
+          { icon: "fa-unlink", text: "أنظمة منفصلة تسبب فقد البيانات." },
           { icon: "fa-dice", text: "قرارات مبنية على التخمين بدل البيانات." },
         ],
       },
@@ -512,7 +513,7 @@ const i18n = {
         items: [
           {
             icon: "fa-check-circle",
-            text: "تتبع مركزي يضمن صفر ضياع للعملاء.",
+            text: "تتبع مركزي يضمن عدم ضياع العملاء.",
           },
           { icon: "fa-robot", text: "متابعة آلية وإلزامية ضمن SLA." },
           {
@@ -529,7 +530,7 @@ const i18n = {
       systems: [
         {
           id: "whatsapp",
-          name: "واتساب بزنس + ذكاء اصطناعي",
+          name: "واتساب للاعمال + ذكاء اصطناعي",
           description:
             "حملات جماعية مربوطة مع CRM، مع تصنيف اهتمام ومشاعر بالذكاء الاصطناعي لضمان عدم ضياع أي Lead.",
           capabilities: [
@@ -547,10 +548,10 @@ const i18n = {
           ],
           process: [
             "إطلاق حملة Broadcast من المبيعات/التسويق.",
-            "كل رد يدخل CRM كـ محادثة وتحديث لليد.",
+            "كل رد يدخل CRM كـ محادثة وتحديث لل lead.",
             "AI يصنف الاهتمام والمشاعر تلقائياً.",
             "CRM ينشئ Task فورية للمندوب مع SLA.",
-            "المشاعر السلبية تفتح Ticket وتصعيد لحماية الصفقة.",
+            "المشاعر السلبية تفتح Ticket  لحماية الصفقة.",
           ],
           salesHow: [
             "رد أسرع يمنع العميل يروح لمنافس.",
@@ -592,7 +593,7 @@ const i18n = {
             "تطبيق سياسة مكافأة واحدة لمنع الهرمية والخسائر.",
           ],
           salesHow: [
-            "Leads دافئة من توصية → إغلاق أسرع.",
+            "Leads من توصية → إغلاق أسرع.",
             "العميل صار قناة جذب → Leads أكثر دون صرف كبير.",
             "تحفيز المندوب يزيد المتابعة والنتائج.",
           ],
@@ -606,14 +607,14 @@ const i18n = {
 
         {
           id: "sap",
-          name: "لوحة SAP (لحظي)",
+          name: "لوحة SAP",
           description:
             "SAP هو مصدر الحقيقة للمعاملات. لوحة BI تعرض الأداء برسوم وتصدر تقارير تلقائية للإدارة.",
           capabilities: [
             "لوحات رسومية لحظية",
             "تقارير تلقائية (يومي/أسبوعي)",
             "رؤية لكل براند/فرع/مندوب",
-            "كشف الاتجاهات والانحرافات بسرعة",
+            "متابعة الأداء ومعرفة ما يتحسّن وما يتراجع",
           ],
           integration: ["SAP Core", "Dashboard/BI", "CRM (اختياري)"],
           process: [
@@ -664,7 +665,7 @@ const i18n = {
           ],
           controlHow: [
             "محاسبة المندوبين عبر SLA وتقارير أداء.",
-            "إدارة تقدر تتدخل فوراً عند أي تقصير.",
+            "الإدارة تقدر تتدخل فوراً عند أي تقصير.",
           ],
           impact: ["لا إهمال", "انضباط أعلى", "إغلاق أفضل"],
         },
@@ -691,7 +692,7 @@ const i18n = {
           ],
           process: [
             "كل القنوات تولد Leads داخل CRM.",
-            "ربط Lead بالمخزون وسياق SAP.",
+            "ربط Lead بالمخزون  SAP.",
             "دورة متابعة تتغير حسب مرحلة العميل وفيدباكه.",
             "الشكاوي تتحول Tickets مع مسؤول وسقف زمني للحل.",
             "توثيق كامل لكل خطوة ونتيجة.",
@@ -702,7 +703,7 @@ const i18n = {
           ],
           controlHow: [
             "حوكمة موحدة للمبيعات والخدمة.",
-            "رؤية كاملة للبايبلاين وأداء الموظفين.",
+            "رؤية كاملة لمسار المبيعات وأداء الموظفين.",
             "منع ضياع العميل بين الأقسام عبر Tickets.",
           ],
           impact: ["تجربة أفضل", "ولاء أعلى", "ثقة بالعلامة"],
@@ -716,7 +717,7 @@ const i18n = {
           capabilities: [
             "تتبع صرف لحظي",
             "كشف البراندات الضعيفة",
-            "قياس العائد وجودة الليدز",
+            "قياس العائد وجودة الل leads",
             "تحسين وتوجيه الميزانية",
           ],
           integration: [
@@ -731,7 +732,7 @@ const i18n = {
           ],
           salesHow: [
             "الصرف يروح للحملات التي تجيب Leads قابلة للتحويل.",
-            "إيقاف الهدر بدري → Leads أفضل.",
+            "إيقاف الهدر بشكل مبكر→ Leads أفضل.",
           ],
           controlHow: [
             "وضوح كامل: أين صرفنا وما الذي رجع.",
@@ -756,7 +757,7 @@ const i18n = {
           process: [
             "كل DM وتعليق يدخل الصندوق الموحد.",
             "الموظف يرد من نفس الشاشة.",
-            "الاستفسار يتحول Lead داخل CRM أو تحديث لليد موجود.",
+            "الاستفسار يتحول Lead داخل CRM أو تحديث لل lead موجود.",
             "CRM يبدأ دورة متابعة تلقائياً.",
           ],
           salesHow: [
@@ -765,7 +766,7 @@ const i18n = {
           ],
           controlHow: [
             "Queue/Status ومساءلة للموظف.",
-            "سجل محادثات مرتبط بالليد.",
+            "سجل محادثات مرتبط بالل lead.",
           ],
           impact: ["تفاعل أعلى", "رضا العملاء", "لا طلبات فائتة"],
         },
@@ -796,7 +797,7 @@ const i18n = {
             "نتيجة الاتصال تتسجل وتستمر المتابعة داخل CRM.",
           ],
           salesHow: [
-            "Leads ساخنة تتواصل معها بسرعة → إغلاق أعلى.",
+            "Leads  تتواصل معها بسرعة → إغلاق أعلى.",
             "Backup يمنع أي فقد تقني → صفر ضياع.",
           ],
           controlHow: [
@@ -914,7 +915,7 @@ function buildAppData(lang) {
 
   return {
     challenge: { ...t.challenge, style: "border-l-8 border-red-400" },
-    solution: { ...t.solution, style: "border-l-8 border-teal-500" },
+    solution: { ...t.solution, style: "border-l-8 border-teal-500 text-start" },
     systems,
   };
 }
@@ -1190,6 +1191,7 @@ function loadSystemDetail(id) {
       </div>
     </div>
   `;
+  console.log("✅ APP.JS LOADED - META TEXT VERSION 777");
 
   // left panel (story)
   const integrationChips = (sys.integration || [])
@@ -1311,6 +1313,17 @@ function loadSystemDetail(id) {
   `;
 
   detailView.classList.remove("hidden");
+  // ✅ Scroll smoothly to detail view
+  setTimeout(() => {
+    const yOffset = -100; // 👈 عدّل الرقم حسب ما بدك
+    const y =
+      detailView.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+    window.scrollTo({
+      top: y,
+      behavior: "smooth",
+    });
+  }, 100);
 
   // Init chart (if overview is chart)
   if (sys.chartType) initChart(sys.chartType, sys.chartData);
@@ -1477,3 +1490,4 @@ window.openLightbox = openLightbox;
 window.closeLightbox = closeLightbox;
 window.forceCloseLightbox = forceCloseLightbox;
 window.toggleAcc = toggleAcc;
+console.log("✅ APP.JS LOADED - META TEXT VERSION 777");
