@@ -28,6 +28,21 @@ const detailView = document.getElementById("detail-view");
 ========================= */
 const i18n = {
   en: {
+    team: {
+      title: "Project Team",
+      subtitle: "The team behind the design and execution of this ecosystem",
+      members: {
+        ali: {
+          name: "Ali Al-Neame",
+          role: "Project Manager / Technical Lead",
+        },
+        nour: { name: "Nour Al-Alwan", role: "Full-Stack Developer" },
+        raed: { name: "Raed Abzakh", role: "Integration Engineer" },
+        mahmoud: { name: "Mahmoud Al-Sayed", role: "AI Developer" },
+        shehab: { name: "Shehab Mohammad", role: "Front-End Developer" },
+      },
+    },
+
     nav: { overview: "Overview", ecosystem: "The Ecosystem", impact: "Impact" },
     hero: {
       badge: "Digital transformation of Laith Al-Obaidi Company",
@@ -37,6 +52,7 @@ const i18n = {
         "A fully integrated ecosystem that increases sales, increases control, and eliminates lead loss across all brands.",
       cta: "Explore the Journey",
     },
+
     shift: {
       title: "The Shift",
       subtitle: "Toggle to see how deep integration changed the business.",
@@ -434,6 +450,18 @@ const i18n = {
   },
 
   ar: {
+    team: {
+      title: "أعضاء الفريق",
+      subtitle: "الفريق المسؤول عن تصميم وتنفيذ هذه المنظومة",
+      members: {
+        ali: { name: "علي النعيمي", role: "مدير المشروع / قائد تقني" },
+        nour: { name: "نور العلوان", role: "مطور Full-Stack " },
+        raed: { name: "رعد ابزاخ", role: "مهندس تكامل" },
+        mahmoud: { name: "محمود السيد", role: "مطور ذكاء اصطناعي" },
+        shehab: { name: "شهاب محمد", role: "مطور واجهات" },
+      },
+    },
+
     nav: {
       overview: "نظرة عامة",
       ecosystem: "المنظومة المتكاملة",
