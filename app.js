@@ -906,6 +906,7 @@ const systemsBase = [
       "./whatsapp/whatsapp.png",
       "./whatsapp/wjatsapp1.png",
       "./whatsapp/whatsapp2.png",
+      "./whatsapp/whatsapp3.jpeg",
     ],
     chartData: {
       labels: ["Interested", "Not Interested", "Unsure"],
@@ -924,6 +925,15 @@ const systemsBase = [
       "./reward/rewards.jpeg",
       "./reward/reward1.png",
       "./reward/reward2.png",
+      "./reward/reward3.png",
+      "./reward/reward4.png",
+      "./reward/reward5.png",
+      "./reward/reward6.png",
+      "./reward/reward7.png",
+      "./reward/reward8.png",
+      "./reward/reward9.png",
+      "./reward/reward10.png",
+      "./reward/reward11.png",
     ],
     visualType: "flow",
   },
@@ -935,6 +945,17 @@ const systemsBase = [
       "./sap/sap1.png",
       "./sap/sap2.png",
       "./sap/sap3.png",
+      "./sap/sap4.png",
+      "./sap/sap5.png",
+      "./sap/sap6.png",
+      "./sap/sap7.png",
+      "./sap/sap8.png",
+      "./sap/sap9.png",
+      "./sap/sap10.png",
+      "./sap/sap11.png",
+      "./sap/sap12.png",
+      "./sap/sap13.png",
+      "./sap/sap14.png",
     ],
     chartType: "line",
     chartData: {
@@ -965,7 +986,16 @@ const systemsBase = [
   {
     id: "crm",
     icon: "fa-database",
-    screenshots: ["./crm/crm1.png", "./crm/crm2.png", "./crm/crm3.png"],
+    screenshots: [
+      "./crm/crm1.png",
+      "./crm/crm2.png",
+      "./crm/crm3.png",
+      "./crm/crm4.png",
+      "./crm/crm5.png",
+      "./crm/crm6.png",
+      "./crm/crm7.png",
+      "./crm/crm8.png",
+    ],
     visualType: "icon-grid",
   },
   {
@@ -1233,9 +1263,9 @@ function loadSystemDetail(id) {
     `;
   }
 
-  // Screenshots slider
-  const hasShots = sys.screenshots && sys.screenshots.length;
-  const sliderId = `slider-${sys.id}`;
+// حساب عدد الصور الإضافية
+  const hasShots = sys.screenshots && sys.screenshots.length > 0;
+  const extraCount = hasShots ? sys.screenshots.length - 4 : 0;
 
   // right panel (tabs)
   const rightPanel = `
@@ -1263,27 +1293,44 @@ function loadSystemDetail(id) {
         ${overviewVisual}
       </div>
 
-      <div id="tab-shots-${sys.id}" class="hidden">
+      <div id="tab-shots-${sys.id}" class="hidden mt-2">
         ${
           hasShots
             ? `
-          <div class="slider-shell" id="${sliderId}">
-            <div class="slider-track">
-              ${sys.screenshots
-                .map(
-                  (src) => `
-                <div class="slider-slide">
-                  <img src="${src}" alt="screenshot" onclick="openLightbox('${src}')" />
-                </div>
-              `,
-                )
-                .join("")}
-            </div>
-
-            
-          </div>
-
-          <div class="slider-meta">
+          <div class="grid grid-cols-2 gap-3" id="gallery-grid-${sys.id}">
+            ${sys.screenshots.map((src, index) => {
+              // عرض أول 4 صور كحد أقصى بشكل طبيعي (إذا لم يكن هناك صور إضافية)
+              if (index < 3 || (index === 3 && extraCount === 0)) {
+                return `
+                  <div class="aspect-video bg-stone-100 rounded-lg overflow-hidden cursor-pointer border border-stone-200 shadow-sm hover:shadow-md transition" onclick="openLightbox('${src}')">
+                    <img src="${src}" class="w-full h-full object-cover hover:scale-105 transition duration-500" alt="screenshot" />
+                  </div>
+                `;
+              } 
+              // الصورة الرابعة عليها زر مشاهدة المزيد
+              else if (index === 3 && extraCount > 0) {
+                return `
+                  <div id="more-overlay-${sys.id}" class="relative aspect-video bg-stone-100 rounded-lg overflow-hidden cursor-pointer border border-stone-200 shadow-sm group" onclick="expandGallery('${sys.id}')">
+                    <img src="${src}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="screenshot" />
+                    <div class="absolute inset-0 bg-stone-900/70 flex flex-col items-center justify-center transition group-hover:bg-stone-900/80">
+                      <span class="text-white font-bold text-2xl drop-shadow-md">+${extraCount}</span>
+                      <span class="text-white/90 text-sm font-medium mt-1">${currentLang === 'ar' ? 'مشاهدة المزيد' : 'View More'}</span>
+                    </div>
+                  </div>
+                  <div class="hidden expanded-img-${sys.id} aspect-video bg-stone-100 rounded-lg overflow-hidden cursor-pointer border border-stone-200 shadow-sm hover:shadow-md transition" onclick="openLightbox('${src}')">
+                    <img src="${src}" class="w-full h-full object-cover hover:scale-105 transition duration-500" alt="screenshot" />
+                  </div>
+                `;
+              } 
+              // باقي الصور المخفية
+              else {
+                return `
+                  <div class="hidden expanded-img-${sys.id} aspect-video bg-stone-100 rounded-lg overflow-hidden cursor-pointer border border-stone-200 shadow-sm hover:shadow-md transition" onclick="openLightbox('${src}')">
+                    <img src="${src}" class="w-full h-full object-cover hover:scale-105 transition duration-500" alt="screenshot" />
+                  </div>
+                `;
+              }
+            }).join("")}
           </div>
         `
             : `
@@ -1564,7 +1611,18 @@ function openLightbox(src) {
   img.src = src;
   lb.classList.add("open");
 }
+/* =========================
+   18) Expand Gallery Grid
+========================= */
+function expandGallery(sysId) {
+  // إخفاء طبقة الـ "+N المزيد"
+  const overlay = document.getElementById(`more-overlay-${sysId}`);
+  if (overlay) overlay.classList.add("hidden");
 
+  // إظهار باقي الصور المخفية
+  const hiddenImages = document.querySelectorAll(`.expanded-img-${sysId}`);
+  hiddenImages.forEach(img => img.classList.remove("hidden"));
+}
 function closeLightbox(e) {
   if (e.target && e.target.id === "lightbox") forceCloseLightbox();
 }
@@ -1584,7 +1642,7 @@ document.addEventListener("keydown", (e) => {
 /* =========================
    17) Expose functions for inline onclick
 ========================= */
-window.toggleLanguage = toggleLanguage;
+window.expandGallery = expandGallery;
 window.scrollToSection = scrollToSection;
 window.loadSystemDetail = loadSystemDetail;
 window.setRightTab = setRightTab;
