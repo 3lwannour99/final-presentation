@@ -336,3 +336,46 @@ html[dir="rtl"] .acc-btn {
   border-radius: 12px;
   border: 1px solid #e7e5e4;
 }
+/* =========================
+   أزرار التنقل في الـ Lightbox
+========================= */
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #1c1917;
+  z-index: 10000;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.lightbox-nav:hover {
+  background: #fff;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.left-nav { left: 30px; }
+.right-nav { right: 30px; }
+
+/* توافق الأسهم مع اللغة العربية (RTL) */
+html[dir="rtl"] .left-nav {
+  left: auto;
+  right: 30px;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+html[dir="rtl"] .right-nav {
+  right: auto;
+  left: 30px;
+  transform: translateY(-50%) rotate(180deg);
+}

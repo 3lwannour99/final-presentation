@@ -405,7 +405,43 @@ const i18n = {
             "No missed inquiries",
           ],
         },
-
+{
+          id: "sales",
+          name: "Sales & Quotations System",
+          description:
+            "A dedicated sales portal empowering the team to generate quotations, create sales orders, and reserve vehicle chassis in real-time. Fully integrated with SAP, featuring specialized dashboards for Sales Reps, Managers, and Admins.",
+          capabilities: [
+            "Generate Quotations & Sales Orders",
+            "Real-time Chassis (VIN) Reservation",
+            "Role-based Dashboards (Admin, Manager, Rep)",
+            "Instant SAP Synchronization",
+          ],
+          integration: [
+            "Sales App Portal",
+            "SAP Core",
+            "CRM",
+            "Inventory Database",
+          ],
+          process: [
+            "Sales rep selects a vehicle and generates an official quotation for the customer.",
+            "Upon agreement, the rep reserves the specific chassis number instantly.",
+            "The system creates a Sales Order and syncs it to SAP to lock the inventory.",
+            "Manager dashboard tracks pending approvals, locked chassis, and team targets.",
+            "Admin oversees the entire workflow, pricing matrices, and role assignments.",
+          ],
+          salesHow: [
+            "Faster quotation generation helps close deals before competitors.",
+            "Real-time chassis locking prevents double-selling and embarrassing mistakes.",
+            "Personal dashboards motivate reps by tracking their targets and pipeline.",
+          ],
+          controlHow: [
+            "Managers see live conversion rates and pending orders without asking.",
+            "SAP integration ensures 100% accurate inventory and financial data.",
+            "Admins control pricing limits and discount approvals centrally.",
+          ],
+          impact: ["Accelerated Sales", "Inventory Accuracy", "Role-based Control"],
+          chartTitle: "Quotation to Sales Order Conversion",
+        },
         {
           id: "web",
           name: "Websites Integration (4 Brands)",
@@ -848,7 +884,47 @@ const i18n = {
             "تغطية شاملة لكافة الاستفسارات",
           ],
         },
-
+{
+          id: "sales",
+          name: "نظام المبيعات وعروض الأسعار",
+          description:
+            "بوابة مبيعات متخصصة تُمكّن الفريق من إصدار عروض الأسعار، إنشاء أوامر البيع، وحجز أرقام الهيكل (الشواصي) بشكل لحظي. النظام مربوط بالكامل مع SAP ويحتوي على لوحات تحكم (Dashboards) مخصصة للمناديب، المدراء، ومسؤولي النظام (Admins).",
+          capabilities: [
+            "إصدار عروض الأسعار وأوامر البيع.",
+            "حجز الشواصي (المركبات) وقفلها بشكل لحظي.",
+            "لوحات تحكم مخصصة حسب الصلاحية (مندوب، مدير، أدمن).",
+            "مزامنة ثنائية وفورية مع نظام SAP.",
+          ],
+          integration: [
+            "بوابة المبيعات (Sales App)",
+            "نظام SAP الأساسي",
+            "نظام CRM",
+            "قاعدة بيانات المخزون",
+          ],
+          process: [
+            "يقوم المندوب باختيار المركبة وإصدار عرض سعر رسمي للعميل عبر النظام.",
+            "عند موافقة العميل، يقوم المندوب بحجز رقم الشاصي المطلوب بشكل لحظي.",
+            "يُنشئ النظام أمر بيع (Sales Order) ويزامنه فوراً مع SAP لقفل المخزون.",
+            "تتابع لوحة تحكم المدير الموافقات المعلقة، الشواصي المحجوزة، وأداء الفريق.",
+            "يقوم مسؤول النظام (Admin) بالإشراف على سير العمل، تسعير المركبات، والصلاحيات.",
+          ],
+          salesHow: [
+            "سرعة إصدار عروض الأسعار تساهم في إغلاق الصفقات قبل المنافسين.",
+            "الحجز اللحظي للشواصي يمنع بيع نفس المركبة لعميلين ويحمي سمعة الشركة.",
+            "متابعة المندوبين لأهدافهم (Targets) عبر لوحات تحكم شخصية ترفع من إنتاجيتهم.",
+          ],
+          controlHow: [
+            "متابعة المدراء لمعدلات التحويل والطلبات المعلقة لحظياً دون الحاجة لتقارير يدوية.",
+            "الربط مع SAP يضمن دقة بنسبة 100% في بيانات المخزون والأمور المالية.",
+            "التحكم المركزي في سقف الأسعار وصلاحيات الخصومات يتم حصرياً عبر الـ Admin.",
+          ],
+          impact: [
+            "تسريع دورة المبيعات",
+            "دقة تامة في المخزون",
+            "إدارة حازمة للصلاحيات",
+          ],
+          chartTitle: "معدل تحويل عروض الأسعار إلى أوامر بيع (نموذج)",
+        },
         {
           id: "web",
           name: "تكامل المواقع الإلكترونية",
@@ -914,6 +990,36 @@ const systemsBase = [
         {
           data: [65, 25, 10],
           backgroundColor: ["#0f766e", "#d6d3d1", "#fcd34d"],
+        },
+      ],
+    },
+  },
+  {
+    id: "sales",
+    icon: "fa-file-invoice-dollar", // أيقونة معبرة عن المبيعات والفواتير
+    screenshots: [
+      "./sales/sales1.png",
+      "./sales/sales2.png",
+      "./sales/sales3.png",
+      "./sales/sales4.png",
+      "./sales/sales5.png",
+      "./sales/sales6.png",
+      "./sales/sales7.png",
+      "./sales/sales8.png",
+      "./sales/sales9.png",
+      "./sales/sales10.png",
+      "./sales/sales11.png",
+      "./sales/sales12.png",
+      "./sales/sales13.png",
+      "./sales/sales14.png",
+    ],
+    chartType: "doughnut",
+    chartData: {
+      labels: ["عروض أسعار (Quotes)", "أوامر بيع (Orders)", "شواصي محجوزة (Reserved)"],
+      datasets: [
+        {
+          data: [150, 85, 80],
+          backgroundColor: ["#d6d3d1", "#0f766e", "#fcd34d"],
         },
       ],
     },
@@ -1302,7 +1408,7 @@ function loadSystemDetail(id) {
               // عرض أول 4 صور كحد أقصى بشكل طبيعي (إذا لم يكن هناك صور إضافية)
               if (index < 3 || (index === 3 && extraCount === 0)) {
                 return `
-                  <div class="aspect-video bg-stone-100 rounded-lg overflow-hidden cursor-pointer border border-stone-200 shadow-sm hover:shadow-md transition" onclick="openLightbox('${src}')">
+                  <div class="aspect-video bg-stone-100 rounded-lg overflow-hidden cursor-pointer border border-stone-200 shadow-sm hover:shadow-md transition" onclick="openLightbox('${sys.id}', ${index})">
                     <img src="${src}" class="w-full h-full object-cover hover:scale-105 transition duration-500" alt="screenshot" />
                   </div>
                 `;
@@ -1317,7 +1423,7 @@ function loadSystemDetail(id) {
                       <span class="text-white/90 text-sm font-medium mt-1">${currentLang === 'ar' ? 'مشاهدة المزيد' : 'View More'}</span>
                     </div>
                   </div>
-                  <div class="hidden expanded-img-${sys.id} aspect-video bg-stone-100 rounded-lg overflow-hidden cursor-pointer border border-stone-200 shadow-sm hover:shadow-md transition" onclick="openLightbox('${src}')">
+                  <div class="hidden expanded-img-${sys.id} aspect-video bg-stone-100 rounded-lg overflow-hidden cursor-pointer border border-stone-200 shadow-sm hover:shadow-md transition" onclick="openLightbox('${sys.id}', ${index})">
                     <img src="${src}" class="w-full h-full object-cover hover:scale-105 transition duration-500" alt="screenshot" />
                   </div>
                 `;
@@ -1325,7 +1431,7 @@ function loadSystemDetail(id) {
               // باقي الصور المخفية
               else {
                 return `
-                  <div class="hidden expanded-img-${sys.id} aspect-video bg-stone-100 rounded-lg overflow-hidden cursor-pointer border border-stone-200 shadow-sm hover:shadow-md transition" onclick="openLightbox('${src}')">
+                  <div class="hidden expanded-img-${sys.id} aspect-video bg-stone-100 rounded-lg overflow-hidden cursor-pointer border border-stone-200 shadow-sm hover:shadow-md transition" onclick="openLightbox('${sys.id}', ${index})">
                     <img src="${src}" class="w-full h-full object-cover hover:scale-105 transition duration-500" alt="screenshot" />
                   </div>
                 `;
@@ -1602,27 +1708,44 @@ function scrollToSection(id) {
 }
 
 /* =========================
-   16) Lightbox
+   16) Lightbox (Gallery Navigation)
 ========================= */
-function openLightbox(src) {
-  const lb = document.getElementById("lightbox");
-  const img = document.getElementById("lightbox-img");
-  if (!lb || !img) return;
-  img.src = src;
-  lb.classList.add("open");
-}
-/* =========================
-   18) Expand Gallery Grid
-========================= */
-function expandGallery(sysId) {
-  // إخفاء طبقة الـ "+N المزيد"
-  const overlay = document.getElementById(`more-overlay-${sysId}`);
-  if (overlay) overlay.classList.add("hidden");
+let currentLightboxImages = [];
+let currentLightboxIndex = 0;
 
-  // إظهار باقي الصور المخفية
-  const hiddenImages = document.querySelectorAll(`.expanded-img-${sysId}`);
-  hiddenImages.forEach(img => img.classList.remove("hidden"));
+function openLightbox(sysId, index) {
+  const sys = appData.systems.find((s) => s.id === sysId);
+  if (!sys || !sys.screenshots) return;
+
+  currentLightboxImages = sys.screenshots;
+  currentLightboxIndex = index;
+
+  updateLightboxImage();
+
+  const lb = document.getElementById("lightbox");
+  if (lb) lb.classList.add("open");
 }
+
+function updateLightboxImage() {
+  const img = document.getElementById("lightbox-img");
+  if (!img || currentLightboxImages.length === 0) return;
+  img.src = currentLightboxImages[currentLightboxIndex];
+}
+
+function nextLightboxImage(e) {
+  if (e) e.stopPropagation();
+  if (currentLightboxImages.length === 0) return;
+  currentLightboxIndex = (currentLightboxIndex + 1) % currentLightboxImages.length;
+  updateLightboxImage();
+}
+
+function prevLightboxImage(e) {
+  if (e) e.stopPropagation();
+  if (currentLightboxImages.length === 0) return;
+  currentLightboxIndex = (currentLightboxIndex - 1 + currentLightboxImages.length) % currentLightboxImages.length;
+  updateLightboxImage();
+}
+
 function closeLightbox(e) {
   if (e.target && e.target.id === "lightbox") forceCloseLightbox();
 }
@@ -1633,10 +1756,21 @@ function forceCloseLightbox() {
   if (!lb || !img) return;
   lb.classList.remove("open");
   img.src = "";
+  currentLightboxImages = [];
 }
 
 document.addEventListener("keydown", (e) => {
+  const lb = document.getElementById("lightbox");
+  if (!lb || !lb.classList.contains("open")) return;
+
   if (e.key === "Escape") forceCloseLightbox();
+  
+  if (e.key === "ArrowRight") {
+    if (document.documentElement.dir === "rtl") prevLightboxImage(); else nextLightboxImage();
+  }
+  if (e.key === "ArrowLeft") {
+    if (document.documentElement.dir === "rtl") nextLightboxImage(); else prevLightboxImage();
+  }
 });
 
 /* =========================
@@ -1651,4 +1785,6 @@ window.sliderPrev = sliderPrev;
 window.openLightbox = openLightbox;
 window.closeLightbox = closeLightbox;
 window.forceCloseLightbox = forceCloseLightbox;
+window.nextLightboxImage = nextLightboxImage;
+window.prevLightboxImage = prevLightboxImage;
 window.toggleAcc = toggleAcc;
